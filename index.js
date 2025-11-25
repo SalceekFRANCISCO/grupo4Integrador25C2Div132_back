@@ -1,7 +1,7 @@
 import express from "express";
 import mySql from "mysql2/promise";
-import environments from "./config/environments.js";
-import connection  from "./database/db.js";
+import environments from "./src/api/config/environments.js";
+import connection  from "./src/api/database/db.js";
 import cors from "cors";
 
 const app = express();
