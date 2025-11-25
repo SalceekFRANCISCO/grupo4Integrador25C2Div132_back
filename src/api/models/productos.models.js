@@ -32,7 +32,7 @@ export const actualizarProducto = (nombre, precio, tipo, img_url, stock, id) => 
 
 // Delete
 export const eliminarProducto = (id) => {
-    let sql = "";
+    let sql = "DELETE FROM productos WHERE id = ?";
 
     return connection.query(sql, [id]);
 }
