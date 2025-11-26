@@ -12,6 +12,7 @@ export async function getAllProducts(request, response){
         
     } catch (error) {
         
+        // todo esto se podria modularizar en una funcion aparte donde solo pasas el error y el mensaje
         response.status(500).json({
             message: "No se pudieron obtener los productos"
         })
@@ -118,15 +119,30 @@ export async function updateProduct(request, response) {
 
 export async function deleteProduct(request, response) {
     try {
+
+        const {id} = request.params; //esto me genera dudas!! no se como especificamente obtiene el id
+
+        const [resultado] = await productModels.eliminarProducto(id);
+
+        if (!resultado.affectedRows === 0){
+            return response.status(400).json({
+                message: "No se elimino el producto"
+            });
+        }
+
+        // todo esto tambien puede modularizarse pasando el status, la response y el mensaje
+        response.status(200).json({ 
+            payload: rows,
+            message: "Eliminacion de producto exitosa."
+        });
         
     } catch (error) {
 
         response.status(500).json({
-            message: "Error obteniendo el producto"
+            message: "Error eliminando el producto"
         });
         
         console.error("Error interno del servidor"+error.message);
-        
     }
     
 };
