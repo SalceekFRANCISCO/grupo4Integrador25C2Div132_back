@@ -1,6 +1,16 @@
 import connection from "../database/db.js"
 import productModels from "../models/productos.models.js"
 
+// ideas Para modularizar
+
+/* modularizar el res.500
+modularizar el res.200 cambiar de alguna forma el de getallproducts
+validacion en getelementbyid
+validacion en insertProduct
+validacion en updateProduct con affectedRows
+
+*/
+
 export async function getAllProducts(request, response){
     try {
         const [rows, fields] = await productModels.seleccionarTodosLosProductos();

@@ -9,6 +9,7 @@ const PORT = environments.port;
 
 
 app.use(cors());
+
 app.get("/", (req, res) => {
     res.send("TP Integrador Div 132");
 });
