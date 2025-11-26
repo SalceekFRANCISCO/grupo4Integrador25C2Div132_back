@@ -36,7 +36,3 @@ export const eliminarProducto = (id) => {
 
     return connection.query(sql, [id]);
 }
-
-// DELETE FROM Students
-
-// WHERE StudentID = 003;
