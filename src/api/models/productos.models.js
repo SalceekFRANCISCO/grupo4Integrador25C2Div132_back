@@ -36,3 +36,11 @@ export const eliminarProducto = (id) => {
 
     return connection.query(sql, [id]);
 }
+
+export default {
+    seleccionarTodosLosProductos,
+    seleccionarProductoPorId,
+    agregarProducto,
+    actualizarProducto,
+    eliminarProducto
+}

@@ -38,7 +38,7 @@ export async function getProductById(request, response) {
         const [rows, fields] = await productModels.seleccionarProductoPorId(id);
 
         if(rows.length === 0){
-            console.log("No existe un producto con id: "+id);
+            console.log(`No existe producto con id: ${id}`);
             
             return response.status(404).json({
                 message: `No existe producto con id: ${id}`
@@ -47,7 +47,7 @@ export async function getProductById(request, response) {
         } else{
             response.status(200).json({
                 payload: rows,
-                message: "Busqueda exitosa"
+                message: "Búsqueda exitosa"
             })
         }
         
@@ -68,7 +68,7 @@ export async function insertProduct(request, response) {
 
         if ( !nombre || !precio || !tipo || !img_url || !stock){
             return request.status(400).json({
-                message: "Datos invalidos"
+                message: "Datos inválidos"
             })
         };
 
@@ -76,7 +76,7 @@ export async function insertProduct(request, response) {
 
         response.status(201).json({
             payload: rows,
-            message: "creacion exitosa."
+            message: "Creación exitosa."
         });
         
     } catch (error) {

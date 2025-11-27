@@ -1,0 +1,11 @@
+
+
+.products-form {
+    width: 35%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 110px;
+    justify-content: space-between;
+}
+

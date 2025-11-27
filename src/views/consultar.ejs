@@ -1,0 +1,15 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/nav.ejs") %>
+
+<main>
+    <h1>Consultar producto por id:</h1>
+    <hr>
+    <form id="getProducts-form" class="products-form">
+        <label for="idProd">ID del producto</label>
+        <input type="number" name="id" id="idProd" required>
+        <input type="submit" value="Consultar Producto">
+    </form>
+    <div id="contenedor-productos"></div>
+</main>
+    <script src="js/consultar.js"></script>
+<%- include("partials/footer.ejs") %>
