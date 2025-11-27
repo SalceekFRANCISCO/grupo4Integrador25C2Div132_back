@@ -8,7 +8,7 @@ export const validateId = (request, response, next) => {
     let {id} = request.params;
 
     if(!id || isNaN(id)){
-        request.status(400).json({
+        response.status(400).json({
             message: "Id invalido"
         });
     }
