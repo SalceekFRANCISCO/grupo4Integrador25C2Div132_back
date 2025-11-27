@@ -2,7 +2,7 @@ import connection from "../database/db.js"
 import { Router } from "express";
 const router = Router();
 
-// me falta importar el middleware
+import { validateId } from "../middlewares/middlewares.js";
 
 import { deleteProduct, getAllProducts,
         getProductById, insertProduct, 
@@ -11,12 +11,12 @@ import { deleteProduct, getAllProducts,
 
 router.get("/", getAllProducts);
 
-router.get("/:id","aca va el validateId" ,getProductById);
+router.get("/:id",validateId ,getProductById);
 
 router.post("/", insertProduct);
 
 router.put("/",updateProduct);
 
-router.delete("/:id","aca va el validateId" ,deleteProduct);
+router.delete("/:id",validateId ,deleteProduct);
 
 export default router;

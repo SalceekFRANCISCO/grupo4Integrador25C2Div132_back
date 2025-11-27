@@ -1,21 +1,18 @@
-import { request, response } from "express"
-import connection from "../database/db.js"
-
 
 export const loggerUrl = (request, response, next) => {
     console.log(`[${new Date().toLocaleString()}] ${request.method} ${request.url}`);
     next();
 }
 
-// arreglar esto que esta mal
 export const validateId = (request, response, next) => {
-    // console.log(`[${new Date().toLocaleString()}] ${request.method} ${request.url}`);
+    let {id} = request.params;
+
+    if(!id || isNaN(id)){
+        request.status(400).json({
+            message: "Id invalido"
+        });
+    }
+
+    request.id = parseInt(id, 10);
     next();
 }
-
-
-
-
-
-
-// escribir codigo, esta en papel
