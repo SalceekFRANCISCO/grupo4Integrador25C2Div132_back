@@ -27,7 +27,9 @@ app.set("view engine", "ejs");
 app.set("views", join(_dirname, "src/views"))
 //#endregion
 
+//#region routes
 app.use("api/products", productRoutes);
+//#endregion 
 
 
 app.get("/dashboard", async (req, res) => {
