@@ -34,11 +34,15 @@ app.use("api/products", productRoutes);
 //#endregion 
 
 
-app.get("/dashboard", async (req, res) => {
+app.get("/", (request, response) => {
+    response.send("TP Integrador Div 132");
+});
+
+app.get("/dashboard", async (request, response) => {
     try {
         const [rows] = await connection.query("SELECT * FROM productos");
         console.log(rows);
-        res.render("index", {
+        response.render("index", {
             title: "Dashboard",
             about: "Listado de productos",
             productos: rows
@@ -48,12 +52,36 @@ app.get("/dashboard", async (req, res) => {
     }
 });
 
-app.get("/", (req, res) => {
-    res.send("TP Integrador Div 132");
+app.get("/consultar", (request, response) => {
+    response.render("consultar", {
+        title: "Consultar",
+        about: "Consultar productos"
+    })
 });
 
-app.get("/upload", (req, res) => {
-    res.render("subirImagen", {
+app.get("/crear", (request, response) => {
+    response.render("crear", {
+        title: "Crear",
+        about: "Crear productos"
+    })
+});
+
+app.get("/modificar", (request, response) => {
+    response.render("modificar", {
+        title: "Modificar",
+        about: "Modificar un producto"
+    })
+});
+
+app.get("/eliminar", (request, response) => {
+    response.render("eliminar", {
+        title: "Eliminar",
+        about: "Eliminar productos"
+    })
+});
+
+app.get("/upload", (request, response) => {
+    response.render("subirImagen", {
         title: "Subir una imagen"
     })
 })

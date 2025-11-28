@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/subirImagen.css">
-  <title><%= typeof title !== 'undefined' ? title : 'Subir archivo' %></title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/subirImagen.css">
+        <title><%= typeof title !== 'undefined' ? title : 'Subir archivo' %></title>
+    </head>
 
-<body>
-  <form id="uploadForm" class="upload-container" enctype="multipart/form-data">
+    <body>
+    <form id="uploadForm" class="upload-container" enctype="multipart/form-data">
     <label id="dropArea" class="drop-zone">
-      <img src="/subir-imagen.png" alt="Subir imagen" class="upload-icon">
-      <p class="drop-text">Arrastra un archivo aquí o <span>explora</span></p>
-      <p class="drop-subtext">Tamaño máximo: 5MB</p>
-      <input type="file" id="fileInput" name="image" />
+        <p class="drop-text">Arrastra un archivo aquí o <span>explora</span></p>
+        <p class="drop-subtext">Tamaño máximo: 5MB</p>
+        <input type="file" id="fileInput" name="image" />
     </label>
 
     <div class="file-preview" id="filePreview">
-      <div id="fileName">Archivo: </div>
-      <div class="progress-bar">
-        <div class="progress-bar-fill" id="progressFill"></div>
-      </div>
+        <div id="fileName">Archivo:</div>
+        <div class="progress-bar">
+            <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
     </div>
 
     <button class="upload-button" type="submit">Subir archivo</button>
-  </form>
-  <script src="js/subirImagen.js"></script>
-</body>
+    </form>
+    <script src="js/subirImagen.js"></script>
+    </body>
 
 </html>

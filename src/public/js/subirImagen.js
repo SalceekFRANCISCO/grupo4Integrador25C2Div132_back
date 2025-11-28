@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001/";
+const API_URL = "http://localhost:3000/";
 
 const dropArea = document.getElementById('dropArea');
 const fileInput = document.getElementById('fileInput');
@@ -43,7 +43,7 @@ function showFile(file) {
 }
 
 // Valor inyectable por EJS desde el servidor. Si no se provee, usa el valor por defecto.
-window.API_URL = '<%= typeof API_URL !== "undefined" ? API_URL : "http://localhost:3001/" %>';
+window.API_URL = '<%= typeof API_URL !== "undefined" ? API_URL : "http://localhost:3000/" %>';
 
 document
   .getElementById("uploadForm")
@@ -58,7 +58,7 @@ document
 
     console.log(data);
     try {
-      const resp = await fetch(API_URL + "api/images", {
+      const resp = await fetch(API_URL + "api/productos/upload", {
         method: "POST",
         body: data,
       });
