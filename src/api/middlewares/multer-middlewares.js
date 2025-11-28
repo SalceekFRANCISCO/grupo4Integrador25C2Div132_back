@@ -1,5 +1,5 @@
 import multer from "multer";
-import {_dirname, join} from "../utils";
+import {_dirname, join} from "../utils/index.js";
 import path from "path";
 import { randomUUID } from "crypto";
 
@@ -41,5 +41,5 @@ export const handleMulterError = (error, req, res, next) => {
 export const multerUploader = multer({
     storage: storageConfig,
     limits: {fileSize: 5 * 1024 * 1024},
-    fileFilter
+    fileFilter: fileFilterConfig
 });

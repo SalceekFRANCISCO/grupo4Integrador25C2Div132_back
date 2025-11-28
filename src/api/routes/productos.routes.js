@@ -8,6 +8,8 @@ import { deleteProduct, getAllProducts,
         getProductById, insertProduct, 
         updateProduct } from "../controlers/productos.controlers.js";
 
+import { multerUploader } from "../middlewares/multer-middlewares.js";
+
 
 router.get("/", getAllProducts);
 

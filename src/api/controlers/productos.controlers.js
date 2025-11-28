@@ -13,11 +13,14 @@ validacion en updateProduct con affectedRows
 
 export async function getAllProducts(request, response){
     try {
-        const [rows, fields] = await productModels.seleccionarTodosLosProductos();
+        //const [rows, fields] = await productModels.seleccionarTodosLosProductos();
+        const limit = parseInt(request.query.limit) || 0;
+        const offset = parsetInt(request.query.offset) || 0;
+        const pagina = await productModels.seleccionarProductos({limit, offset});
 
         response.status(200).json({
-            payload: rows,
-            message: rows.length === 0 ? "No se encontraron los productos":"Productos encontrados"
+            payload: pagina,
+            message: pagina.rows.length === 0 ? "No se encontraron los productos":"Productos encontrados"
         })
         
     } catch (error) {

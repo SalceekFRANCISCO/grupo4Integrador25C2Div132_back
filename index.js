@@ -6,7 +6,7 @@ import cors from "cors";
 import { loggerUrl } from "./src/api/middlewares/middlewares.js";
 import {productRoutes } from "./src/api/routes/index.js";
 import { _dirname, join } from "./src/api/utils/index.js";
-import { handleMulterError } from "./src/api/middlewares/multer-middleware.js";
+import { handleMulterError } from "./src/api/middlewares/multer-middlewares.js";
 
 
 const app = express();
@@ -51,6 +51,12 @@ app.get("/dashboard", async (req, res) => {
 app.get("/", (req, res) => {
     res.send("TP Integrador Div 132");
 });
+
+app.get("/upload", (req, res) => {
+    res.render("subirImagen", {
+        title: "Subir una imagen"
+    })
+})
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo desde el puerto ${PORT}`)
