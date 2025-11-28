@@ -19,4 +19,13 @@ router.put("/",updateProduct);
 
 router.delete("/:id",validateId ,deleteProduct);
 
+router.post("/upload", multerUploader.single("image"), (req,res) => {
+        try{
+                console.log("Imagen subida correctamente")
+                console.log(req.file);
+        }catch(err){
+                console.error("ERROR: " + err)
+        }
+})
+
 export default router;

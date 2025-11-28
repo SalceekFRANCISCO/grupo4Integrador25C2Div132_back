@@ -6,6 +6,8 @@ import cors from "cors";
 import { loggerUrl } from "./src/api/middlewares/middlewares.js";
 import {productRoutes } from "./src/api/routes/index.js";
 import { _dirname, join } from "./src/api/utils/index.js";
+import { handleMulterError } from "./src/api/middlewares/multer-middleware.js";
+
 
 const app = express();
 const PORT = environments.port;
@@ -17,6 +19,7 @@ app.use(cors());
 app.use(loggerUrl);
 app.use(express.json());
 app.use(express.static(join(_dirname, "src/public")));
+app.use(handleMulterError);
 //#endregion
 
 
