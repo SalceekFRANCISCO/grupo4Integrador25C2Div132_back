@@ -1,10 +1,9 @@
-
-export const loggerUrl = (request, response, next) => {
+const loggerUrl = (request, response, next) => {
     console.log(`[${new Date().toLocaleString()}] ${request.method} ${request.url}`);
     next();
 }
 
-export const validateId = (request, response, next) => {
+const validateId = (request, response, next) => {
     let {id} = request.params;
 
     if(!id || isNaN(id)){
@@ -15,4 +14,16 @@ export const validateId = (request, response, next) => {
 
     request.id = parseInt(id, 10);
     next();
+}
+
+const requireLogin = (request, response, next) => {
+    if(!request.session.user) {
+        return response.redirect("/login")
+    }
+}
+
+export {
+    loggerUrl,
+    validateId,
+    requireLogin
 }
