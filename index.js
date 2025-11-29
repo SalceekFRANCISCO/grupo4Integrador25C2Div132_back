@@ -32,7 +32,7 @@ app.set("views", join(_dirname, "src/views"));
 
 
 //#region Routes
-app.use("api/products", productRoutes);
+app.use("/api/productos", productRoutes);
 //#endregion 
 
 
@@ -73,7 +73,7 @@ app.get("/consultar", requireLogin, (request, response) => {
 app.get("/crear", requireLogin, (request, response) => {
     response.render("crear", {
         title: "Crear",
-        about: "Crear productos"
+        about: "Crear"
     })
 });
 
@@ -100,13 +100,13 @@ app.get("/upload", requireLogin, (request, response) => {
 app.get("/login", (request, response) => {
     response.render("login", {
         title: "login",
-        about: "Iniciá sesión bobito"
+        about: "Iniciá sesión"
     });
 });
 
 app.post("/login", async (request, response) => {
     try {
-        const [email, contraseña] = request.body;
+        const {email, contraseña} = request.body;
         console.log(email, contraseña)
 
         if (!email || !contraseña) {
@@ -118,7 +118,7 @@ app.post("/login", async (request, response) => {
         }
 
         const sql = "SELECT * FROM usuarios WHERE email = ? AND contraseña = ?";
-        const [rows] = await connection.query(sql, {email, contraseña});
+        const [rows] = await connection.query(sql, [email, contraseña]);
 
         if (rows[0].length === 0) {
             return response.render("login", {

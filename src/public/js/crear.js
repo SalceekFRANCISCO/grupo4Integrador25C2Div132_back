@@ -4,7 +4,7 @@ let crearProducto_form = document.getElementById("crearProductos-form");
 crearProducto_form.addEventListener("submit", async event => {
     event.preventDefault();
 
-    let formData = new Data(event.target);
+    let formData = new FormData(event.target);
     console.log(formData);
     let data = Object.fromEntries(formData.entries());
     console.log(data);

@@ -18,26 +18,26 @@ export const seleccionarProductos = async ({limit = 10, offset = 0}) => {
 
 // Operacion CRUD
 // Create
-export const agregarProducto = (nombre, precio, tipo, img_url, stock) => {
-    let sql = "INSERT INTO productos (nombre, precio, tipo, img_url, stock) VALUES (?,?,?,?,?)";
+export const agregarProducto = (nombre, precio, categoria, img_url, stock) => {
+    let sql = "INSERT INTO productos (nombre, precio, categoria, img_url, stock) VALUES (?,?,?,?,?)";
     
-    return connection.query(sql, [nombre, precio, tipo, img_url, stock]);
+    return connection.query(sql, [nombre, precio, categoria, img_url, stock]);
 }
 
 // Read
 export const seleccionarProductoPorId = (id) => {
-    let sql = "SELECT FROM productos WHERE id = ?";
+    let sql = "SELECT * FROM productos WHERE id = ?";
     
     return connection.query(sql, [id]);
 }
 
 // Update
-export const actualizarProducto = (nombre, precio, tipo, img_url, stock, id) => {
+export const actualizarProducto = (id, nombre, precio, categoria, img_url, stock) => {
     let sql = `UPDATE productos 
-                SET nombre= ?, precio= ?, tipo= ?, img_url= ?, stock= ? 
+                SET nombre= ?, img_url= ?, categoria= ?,  precio= ?,  stock= ?
                 WHERE id = ?`;
     
-    return connection.query(sql, [nombre, precio, tipo, img_url, stock, id]);
+    return connection.query(sql, [nombre, img_url, categoria, precio, stock, id]);
 }
 
 // Delete

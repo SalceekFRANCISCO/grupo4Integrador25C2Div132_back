@@ -14,14 +14,19 @@ validacion en updateProduct con affectedRows
 
 export async function getAllProducts(request, response){
     try {
-        //const [rows, fields] = await productModels.seleccionarTodosLosProductos();
-        const limit = parseInt(request.query.limit) || 0;
-        const offset = parsetInt(request.query.offset) || 0;
-        const pagina = await productModels.seleccionarProductos({limit, offset});
-
+        const [rows, fields] = await productModels.seleccionarTodosLosProductos();
+        const limit = parseInt(request.query.limit) || 10;
+        const offset = parseInt(request.query.offset) || 0;
+        //const pagina = await productModels.seleccionarProductos({limit, offset});
+        /* 
         response.status(200).json({
             payload: pagina,
             message: pagina.rows.length === 0 ? "No se encontraron los productos":"Productos encontrados"
+        })
+            */
+        response.status(200).json ({
+            payload: rows,
+            message: rows.length === 0 ? "No se encontraron productos" : "Productos encontrados"
         })
         
     } catch (error) {
@@ -42,7 +47,7 @@ export async function getAllProducts(request, response){
 
 export async function getProductById(request, response) {
     try {
-        const {id} = request.params; //esto me genera dudas!! no se como especificamente obtiene el id
+        let {id} = request.params; //esto me genera dudas!! no se como especificamente obtiene el id
 
         const [rows, fields] = await productModels.seleccionarProductoPorId(id);
 
@@ -79,7 +84,7 @@ export async function insertProduct(request, response) {
         const {nombre, precio, tipo, img_url, stock} = request.body;
         
         if ( !nombre || !precio || !tipo || !img_url || !stock){
-            return request.status(400).json({
+            return response.status(400).json({
                 message: "Datos inválidos"
             })
         };
@@ -107,26 +112,25 @@ export async function insertProduct(request, response) {
     
 export async function updateProduct(request, response) {
     try {
-
-    const {nombre, precio, tipo, img_url, stock, id} = request.body;
-
-    if ( !nombre || !precio || !tipo || !img_url || !stock || !id){
-        return request.status(400).json({
-            message: "Datos invalidos o faltan campos."
+        let {id, nombre, precio, categoria, img_url, stock} = request.body;
+        console.log("Cuerpo de la solicitud:", request.body);
+        
+    if (!nombre || !precio || !categoria || !img_url || !stock || !id){
+        return response.status(400).json({
+            message: "Datos inválidos o faltan campos."
         })
     }
 
-    const [resultado] = await productModels.actualizarProducto(nombre, precio, tipo, img_url, stock, id);
+    const [resultado] = await productModels.actualizarProducto(id, nombre, precio, categoria, img_url, stock);
 
-    if (!resultado.affectedRows === 0){
+    if (resultado.affectedRows === 0){
         return response.status(400).json({
-            message: "No se actualizo el producto"
+            message: "No se actualizó el producto"
         });
     }
 
     response.status(200).json({
-        payload: rows,
-        message: "Modificacion de producto exitosa."
+        message: "Modificación de producto exitosa."
     });
 
     } catch (error) {

@@ -14,7 +14,7 @@ getProducts_form.addEventListener("submit", async event => {
     console.log("Id del producto: " + idProducto);
 
     try {
-        let response = await fetch(`http://localhost:3000/api/products/${idProducto}`)
+        let response = await fetch(`http://localhost:3000/api/productos/${idProducto}`)
 
         let datos = await response.json();
         console.log("Los datos son: " + datos);
@@ -57,24 +57,31 @@ function crearFormularioPut(event, producto) {
     let formularioPutHtml = `
         <form id="updateProducts-form" class="products-form-amplio">
 
+            <input type="hidden" name="id" value="${producto.id}">
+
             <label for="nameProd">Nombre</label>
-            <input type="text" name="name" id="nameProd" value="${producto.nombre}" required>
+            <input type="text" name="nombre" id="nameProd" value="${producto.nombre}" required>
             <br>
 
             <label for="imageProd">Imagen</label>
-            <input type="text" name="image" id="imageProd" value="${producto.img_url}" required>
+            <input type="text" name="img_url" id="imageProd" value="${producto.img_url}" required>
             <br>
 
             <label for="categoryProd">Categoria</label>
-            <select name="category" id="categoryProd" required>
-                <option value="food">comida</option>
-                <option value="drink">bebida</option>
+            <select name="categoria" id="categoryProd" required>
+                <option value="sable">Juguete</option>
+                <option value="figura">Ropa</option>
             </select>
             <br>
 
             <label for="priceProd">Precio</label>
-            <input type="number" name="price" id="priceProd" value="${producto.precio}" required>
+            <input type="number" name="precio" id="priceProd" value="${producto.precio}" required>
             <br>
+
+            <label for="stockProd">Stock</label>
+            <input type="number" name="stock" id="priceProd" value="${producto.stock}" required>
+            <br>
+
 
             <input type="submit" value="Actualizar producto">
         </form>
@@ -93,11 +100,13 @@ function crearFormularioPut(event, producto) {
 async function actualizarProducto(event) {
     event.preventDefault();
 
-    let url = "http//localhost:3000/api/products";
+    let url = "http://localhost:3000/api/productos";
 
     let formData = new FormData(event.target);
-    console.log(data);
     let data = Object.fromEntries(formData.entries());
+    console.log(data);
+    data.precio = parseFloat(data.precio);
+    data.stock = parseInt(data.stock)
 
     try {
         let response = await fetch(url, {
@@ -117,7 +126,7 @@ async function actualizarProducto(event) {
             contenedor_formulario.innerHTML = "";
         }
 
-    } catch {
-        console.log("Error :)")
+    } catch(error) {
+        console.log("Error :" + error)
     }
 }
