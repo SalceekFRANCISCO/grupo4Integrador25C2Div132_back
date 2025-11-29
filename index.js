@@ -124,7 +124,7 @@ app.post("/login", async (request, response) => {
             return response.render("login", {
                 title: "login",
                 about: "login",
-                error: "Credenciales inccorrectas"
+                error: "Credenciales incorrectas"
             })
         }
 
