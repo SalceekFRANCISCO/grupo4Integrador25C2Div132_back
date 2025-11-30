@@ -3,10 +3,9 @@
 <main>
 
 
-    <section id="contenedor-productos"></div>
+    <section id="contenedor-productos">
         <% productos.forEach(producto => { %>
             <div class = "card-producto">
-                <!-- <img class="producto-img" src="https://image.api.playstation.com/vulcan/img/rnd/202105/1714/WHeOu95nW2SZQy6H5IKgE2Bg.png" alt="<%=producto.nombre%>">  -->
                 <img class="producto-img" src="<%= producto.img_url %>" alt="<%=producto.nombre%>">
                 <h3><%=producto.nombre%></h3>
                 <p>Id: <%=producto.id%></p>
