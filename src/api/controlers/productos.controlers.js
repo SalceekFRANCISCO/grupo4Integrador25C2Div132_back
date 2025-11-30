@@ -112,10 +112,11 @@ export async function insertProduct(request, response) {
     
 export async function updateProduct(request, response) {
     try {
-        let {id, nombre, precio, categoria, img_url, stock} = request.body;
+        let {id, nombre, precio, img_url, categoria, stock} = request.body;
         console.log("Cuerpo de la solicitud:", request.body);
         
-    if (!nombre || !precio || !categoria || !img_url || !stock || !id){
+    if (!nombre || !precio || !categoria || !img_url || stock === null || !id){
+        console.log("Error: Campos inválidos");
         return response.status(400).json({
             message: "Datos inválidos o faltan campos."
         })

@@ -36,7 +36,7 @@ export const actualizarProducto = (id, nombre, precio, categoria, img_url, stock
     let sql = `UPDATE productos 
                 SET nombre= ?, img_url= ?, categoria= ?,  precio= ?,  stock= ?
                 WHERE id = ?`;
-    
+    console.log(id, nombre, precio, categoria, img_url, stock);
     return connection.query(sql, [nombre, img_url, categoria, precio, stock, id]);
 }
 

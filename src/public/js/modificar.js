@@ -106,7 +106,8 @@ async function actualizarProducto(event) {
     let data = Object.fromEntries(formData.entries());
     console.log(data);
     data.precio = parseFloat(data.precio);
-    data.stock = parseInt(data.stock)
+    data.stock = parseInt(data.stock);
+    data.id = parseInt(data.id);
 
     try {
         let response = await fetch(url, {
