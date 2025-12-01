@@ -1,13 +1,16 @@
-let url = "http://localhost:3000/api/products"
+let url = "http://localhost:3000/api/productos"
 let crearProducto_form = document.getElementById("crearProductos-form");
 
 crearProducto_form.addEventListener("submit", async event => {
     event.preventDefault();
 
     let formData = new FormData(event.target);
-    console.log(formData);
+    console.log("El form-data es " + formData);
     let data = Object.fromEntries(formData.entries());
-    console.log(data);
+    console.log("La data es " + data);
+    data.precio = parseFloat(data.precio);
+    data.stock = parseInt(data.stock);
+    enviarProducto(data);
 })
 
 async function enviarProducto(data) {
@@ -21,6 +24,15 @@ async function enviarProducto(data) {
             },
             body: JSON.stringify(data)
         })
+        let result = await response.json();
+
+        if (response.ok) {
+            console.log(result.message);
+            alert(result.message);
+        } else {
+            console.error(result.message);
+            alert(result.message);
+        }
 
     } catch(error) {
         console.error("Error al enviar los datos: ", error);

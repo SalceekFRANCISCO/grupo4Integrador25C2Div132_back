@@ -5,22 +5,26 @@
     <h1><%= about %></h1>
     <hr>
     <form id="crearProductos-form">
-        <label for="nameProd">Nombre</label>
-        <input type="text" name="nombre" id="nameProd" required>
+        <label for="nombreProd">Nombre</label>
+        <input type="text" name="nombre" id="nombreProd" required>
         <br>
 
-        <label for="imageProd">Imagen</label>
-        <input type="text" name="img_url" id="imageProd" required>
+        <label for="imagenProd">Imagen</label>
+        <input type="text" name="img_url" id="imagenProd" required>
         <br>
 
-        <select name="tipo" id="categoryProd" required>
-            <option value="ropa">Ropa</option>
-            <option value="juguete">Juguete</option>
+        <select name="categoria" id="categoriaProd" required>
+            <option value="figura">Figura</option>
+            <option value="sable">Sable</option>
         </select>
         <br>
 
         <label for="precioProd">Precio</label>
         <input type="number" name="precio" id="precioProd" required>
+        <br>
+
+        <label for="stockProd">Cantidad</label>
+        <input type="number" name="stock" id="stockProd" required>
         <br>
 
         <input type="submit" value="Crear producto">

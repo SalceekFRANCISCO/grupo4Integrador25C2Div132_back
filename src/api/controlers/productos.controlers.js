@@ -41,7 +41,7 @@ export async function getProductById(request, response) {
             enviarRespuesta(response,404,`No existe producto con id: ${id}`);
 
         } else{
-           
+        
             enviarRespuesta(response,200,"Busqueda exitosa",rows);
         }
         
@@ -52,10 +52,30 @@ export async function getProductById(request, response) {
     }
 };
 
+export async function createProduct(request, response) {
+    console.log("Entré");
+    try {
+        console.log("Llegué hasta aquí")
+        let {nombre, img_url, categoria, precio, stock} = request.body;
+        console.log("La body es " + request.body);
+
+        if (!nombre || !categoria || !img_url || !precio || !stock) {
+            enviarRespuesta(response,400,"Datos inválidos");
+        }
+
+        let [rows] = await productModels.agregarProducto(nombre, img_url, categoria, precio, stock);
+
+        enviarRespuesta(response,201,"Creación exitosa.",rows);
+    }
+    catch(error) {
+        mostrarError(response,error,"Error creando el producto");
+    }
+}
+
 export async function insertProduct(request, response) {
     try {
         
-        const {nombre, precio, tipo, img_url, stock} = request.body;
+        const {nombre, img_url, categoria, precio, stock} = request.body;
         
         if ( !nombre || !precio || !tipo || !img_url || !stock){
             enviarRespuesta(response,400,"Datos inválidos");

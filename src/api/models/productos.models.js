@@ -18,10 +18,10 @@ export const seleccionarProductos = async ({limit = 10, offset = 0}) => {
 
 // Operacion CRUD
 // Create
-export const agregarProducto = (nombre, precio, categoria, img_url, stock) => {
-    let sql = "INSERT INTO productos (nombre, precio, categoria, img_url, stock) VALUES (?,?,?,?,?)";
+export const agregarProducto = (nombre, img_url, categoria, precio, stock) => {
+    let sql = "INSERT INTO productos (nombre, img_url, categoria, precio, stock) VALUES (?,?,?,?,?)";
     
-    return connection.query(sql, [nombre, precio, categoria, img_url, stock]);
+    return connection.query(sql, [nombre, img_url, categoria, precio, stock]);
 }
 
 // Read

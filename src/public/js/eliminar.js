@@ -14,7 +14,7 @@ getProducts_form.addEventListener("submit", async event => {
     console.log("Id del producto: " + idProducto);
 
     try {
-        let response = await fetch(`http://localhost:3000/api/products/${idProducto}`)
+        let response = await fetch(`http://localhost:3000/api/productos/${idProducto}`)
 
         let datos = await response.json();
         console.log("Los datos son: " + datos);
@@ -31,8 +31,9 @@ function mostrarProducto(producto) {
 
     let htmlProducto = `
         <li class = "li-listados">
-        <img src="${producto.img_url}" alt=>
-        FALTAN COSAS IMPORTANTES
+            <img src="${producto.img_url}" alt="${producto.nombre}" class="img-listados">
+            <p>Id: ${producto.id} / Nombre: ${producto.nombre} / <strong>Precio: $${producto.precio}</strong> / Stock: ${producto.stock}</p>
+        </li>
         <li class="li-botonera">
         <input type="button" id="deleteProduct_button" value="Eliminar producto">
         </li>`;
@@ -40,10 +41,10 @@ function mostrarProducto(producto) {
     let deleteProduct_button = document.getElementById("deleteProduct_button");
     deleteProduct_button.addEventListener("click", event => {
         event.stopPropagation();
-        let confirmacion = confirm("Seguro que quieres eliminar el producto?");
+        let confirmacion = confirm("¿Seguro que quieres eliminar el producto?");
 
         if(!confirmacion) {
-            alert("Eliminacion cancelada");
+            alert("Eliminación cancelada");
         }
         else {
             eliminarProducto(producto.id);
@@ -52,7 +53,7 @@ function mostrarProducto(producto) {
 }
 
 async function eliminarProducto(id) {
-    let url = "http://localhost:3000/api/products";
+    let url = "http://localhost:3000/api/productos";
 
     try {
         let response = await fetch(`${url}/${id}`, {
@@ -72,6 +73,6 @@ async function eliminarProducto(id) {
         }
     } catch(error) {
         console.error("Error en la solicitud DELETE", error);
-        alert("Ocurrio un error al eliminar un producto");
+        alert("Ocurrió un error al eliminar un producto");
     }
 }

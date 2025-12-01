@@ -5,7 +5,7 @@ const router = Router();
 import { validateId } from "../middlewares/middlewares.js";
 
 import { deleteProduct, getAllProducts,
-        getProductById, insertProduct, 
+        getProductById, createProduct, 
         updateProduct } from "../controlers/productos.controlers.js";
 
 import { multerUploader } from "../middlewares/multer-middlewares.js";
@@ -13,13 +13,13 @@ import { multerUploader } from "../middlewares/multer-middlewares.js";
 
 router.get("/", getAllProducts);
 
-router.get("/:id",validateId ,getProductById);
+router.get("/:id", validateId ,getProductById);
 
-router.post("/", insertProduct);
+router.post("/", createProduct);
 
-router.put("/",updateProduct);
+router.put("/", updateProduct);
 
-router.delete("/:id",validateId ,deleteProduct);
+router.delete("/:id", validateId, deleteProduct);
 
 router.post("/upload", multerUploader.single("image"), (req,res) => {
         try{
