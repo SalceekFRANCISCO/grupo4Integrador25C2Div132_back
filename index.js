@@ -157,6 +157,13 @@ app.post("/logout", (request, response) => {
     })
 })
 
+app.get("/registrar", (request, response) => {
+    response.render("crearUsuario", {
+        title: "Registrar",
+        about: "Registrar un usuario"
+    })
+});
+
 //#region llamada al puerto
 app.listen(PORT, () => {
     console.log(`Servidor corriendo desde el puerto ${PORT}`)
