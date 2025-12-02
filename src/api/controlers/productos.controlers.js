@@ -1,3 +1,4 @@
+import { fileLoader } from "ejs";
 import connection from "../database/db.js"
 import productModels from "../models/productos.models.js"
 import {enviarRespuesta, mostrarError} from "../utils/errorResponses.js"

@@ -11,8 +11,6 @@ export const seleccionarProductos = async ({limit = 10, offset = 0}) => {
     const [[{total}]] = await connection.query(sqlTotalProd);
     
     console.log(total);
-    // console.log('putooooooo');
-    
     
     let sql = "SELECT * FROM productos limit ? offset ?";
 

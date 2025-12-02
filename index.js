@@ -9,6 +9,7 @@ import { _dirname, join } from "./src/api/utils/index.js";
 import { handleMulterError } from "./src/api/middlewares/multer-middlewares.js";
 import session from "express-session";
 import { comparePassword, hashPassword } from "./src/api/utils/bcrypt.js";
+import { seleccionarProductos } from "./src/api/models/productos.models.js";
 
 const app = express();
 const PORT = environments.port;
@@ -55,12 +56,19 @@ app.get("/", (request, response) => {
 
 app.get("/dashboard", requireLogin, async (request, response) => {
     try {
-        const [rows] = await connection.query("SELECT * FROM productos");
-        console.log(rows);
+        // const [rows] = await connection.query("SELECT * FROM productos");
+
+        // const limit = parseInt(request.query.limit) || 10;
+        // const offset = parseInt(request.query.offset) || 0;
+
+        // const pagina = await productModels.seleccionarProductos({limit, offset});
+        const {rows, total} = seleccionarProductos();
+        // console.log(rows);
+
         response.render("index", {
             title: "Dashboard",
             about: "Listado de productos",
-            productos: rows
+            productos: pagina.rows
         });
     } catch(error) {
         console.error(error);
