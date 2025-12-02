@@ -4,16 +4,10 @@ let crearUsuario_form = document.getElementById("login-form");
 crearUsuario_form.addEventListener("submit", async event => {
     event.preventDefault();
 
-    let formData = new FormData(event.target); //esta convirtiendo a objeto clave valor?
-    // console.log("El form-data es " + formData);//mostrar los datos
-    let data = Object.fromEntries(formData.entries());// retorna un objeto de clave valor?
-    // console.log("La data es " + data);//mostrar los datos
-    // data.precio = parseFloat(data.precio); //parseos
-    // data.stock = parseInt(data.stock); //parseos
-    // console.log(data.entries())
-    enviarUsuario(data); //enviar los datos
+    let formData = new FormData(event.target); 
+    let data = Object.fromEntries(formData.entries());
+    enviarUsuario(data);
 })
-
 
 async function enviarUsuario(data) {
     console.table(data)
