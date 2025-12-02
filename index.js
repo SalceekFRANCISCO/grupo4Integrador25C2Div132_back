@@ -4,7 +4,7 @@ import environments from "./src/api/config/environments.js";
 import connection  from "./src/api/database/db.js";
 import cors from "cors";
 import { loggerUrl, requireLogin } from "./src/api/middlewares/middlewares.js";
-import {productRoutes } from "./src/api/routes/index.js";
+import {productRoutes, userRoutes } from "./src/api/routes/index.js";
 import { _dirname, join } from "./src/api/utils/index.js";
 import { handleMulterError } from "./src/api/middlewares/multer-middlewares.js";
 import session from "express-session";
@@ -33,6 +33,7 @@ app.set("views", join(_dirname, "src/views"));
 
 //#region Routes
 app.use("/api/productos", productRoutes);
+app.use("/api/usuarios", userRoutes);
 //#endregion 
 
 

@@ -53,9 +53,7 @@ export async function getProductById(request, response) {
 };
 
 export async function createProduct(request, response) {
-    console.log("Entré");
     try {
-        console.log("Llegué hasta aquí")
         let {nombre, img_url, categoria, precio, stock} = request.body;
         console.log("La body es " + request.body);
 

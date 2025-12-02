@@ -8,7 +8,7 @@
     </div>
 <% } %>
 
-<form id="login-form" action="/registrarse" method="post" autocomplete="off">
+<form id="login-form" action="/api/usuarios" method="post" autocomplete="off">
     <label for="nombreUser">Nombre</label>
     <input type="text" name="nombre" id="nombreUser" required>
 
@@ -18,7 +18,7 @@
     <label for="passwordUser">Password</label>
     <input type="password" name="contraseña" id="passwordUser" required>
 
-    <input type="submit" class="boton-login" value="Login">
-    <input type="button" id="acceso" class="boton-login" value="Acceso rápido">
+    <input type="submit" class="boton-login" value="Crear">
 </form>
+<script src="js/crearUsuario.js"></script>
 <%- include("partials/footer.ejs") %>
