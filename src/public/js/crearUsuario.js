@@ -25,7 +25,6 @@ async function enviarUsuario(data) {
 
         if(response.ok){
             alert(resultado.message);
-            console.log("todo ok");
         }
         else{
             alert(resultado.message);

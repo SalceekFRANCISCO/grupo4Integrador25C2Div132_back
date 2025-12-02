@@ -8,6 +8,7 @@ import {productRoutes, userRoutes } from "./src/api/routes/index.js";
 import { _dirname, join } from "./src/api/utils/index.js";
 import { handleMulterError } from "./src/api/middlewares/multer-middlewares.js";
 import session from "express-session";
+import { comparePassword, hashPassword } from "./src/api/utils/bcrypt.js";
 
 const app = express();
 const PORT = environments.port;
@@ -25,7 +26,7 @@ app.use(handleMulterError);
 //#endregion
 
 
-//#region Config
+//#region Config motor de plantillas
 app.set("view engine", "ejs");
 app.set("views", join(_dirname, "src/views"));
 //#endregion
@@ -46,6 +47,7 @@ app.use(session({
 
 //#endregion
 
+//#region Devolver las vistas
 app.get("/", (request, response) => {
     response.send("TP Integrador Div 132");
 });
@@ -104,11 +106,56 @@ app.get("/login", (request, response) => {
         about: "Iniciá sesión"
     });
 });
+//#endregion
+
+//#region vistas del login
+// app.post("/login", async (request, response) => {
+//     try {
+//         const {email, contraseña} = request.body;
+//         console.log(email, contraseña)
+
+//         if (!email || !contraseña) {
+//             return response.render("login", {
+//                 title: "Login",
+//                 about: "Login",
+//                 error: "Todos los campos son obligatorios"
+//             })
+//         }
+
+//         const sql = "SELECT * FROM usuarios WHERE email = ? AND contraseña = ?";
+//         const [rows] = await connection.query(sql, [email, contraseña]);
+
+//         if (rows[0].length === 0) {
+//             return response.render("login", {
+//                 title: "login",
+//                 about: "login",
+//                 error: "Credenciales incorrectas"
+//             })
+//         }
+
+//         console.log(rows[0]);
+//         const user = rows[0];
+//         console.table(user);
+
+//         request.session.user = {
+//             id: user.id,
+//             nombre: user.nombre,
+//             email: user.email
+//         };
+
+//         response.redirect("/dashboard");
+
+//     } catch(error) {
+//         console.error("Error en el login" + error);
+//     }
+// });
 
 app.post("/login", async (request, response) => {
     try {
         const {email, contraseña} = request.body;
-        console.log(email, contraseña)
+        // console.log(email, contraseña)
+        console.log(await hashPassword(contraseña));
+        
 
         if (!email || !contraseña) {
             return response.render("login", {
@@ -118,8 +165,8 @@ app.post("/login", async (request, response) => {
             })
         }
 
-        const sql = "SELECT * FROM usuarios WHERE email = ? AND contraseña = ?";
-        const [rows] = await connection.query(sql, [email, contraseña]);
+        const sql = "SELECT * FROM usuarios WHERE email = ?";
+        const [rows] = await connection.query(sql, [email]);
 
         if (rows[0].length === 0) {
             return response.render("login", {
@@ -129,9 +176,20 @@ app.post("/login", async (request, response) => {
             })
         }
 
-        console.log(rows[0]);
         const user = rows[0];
         console.table(user);
+
+        const isMatch = await comparePassword(contraseña,user.contraseña); 
+        if(!isMatch){
+            return response.render("login", {
+                title: "login",
+                about: "login",
+                error: "Credenciales incorrectas"
+            })
+        }
+
+         
+
 
         request.session.user = {
             id: user.id,
@@ -164,6 +222,7 @@ app.get("/registrar", (request, response) => {
         about: "Registrar un usuario"
     })
 });
+//#endregion
 
 //#region llamada al puerto
 app.listen(PORT, () => {
