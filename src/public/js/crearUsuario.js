@@ -1,13 +1,45 @@
-const url = 
+const url = "http://localhost:3000/api/usuarios"
+let crearUsuario_form = document.getElementById("login-form");
+
+crearUsuario_form.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    let formData = new FormData(event.target); //esta convirtiendo a objeto clave valor?
+    // console.log("El form-data es " + formData);//mostrar los datos
+    let data = Object.fromEntries(formData.entries());// retorna un objeto de clave valor?
+    // console.log("La data es " + data);//mostrar los datos
+    // data.precio = parseFloat(data.precio); //parseos
+    // data.stock = parseInt(data.stock); //parseos
+    // console.log(data.entries())
+    enviarUsuario(data); //enviar los datos
+})
+
 
 async function enviarUsuario(data) {
-    try {
-        let response = await fetch(url)
-        
+    console.table(data)
 
+    try {
+        let response = await fetch(url,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+                
+        let resultado = await response.json();
+
+        if(response.ok){
+            alert(resultado.message);
+            console.log("todo ok");
+        }
+        else{
+            alert(resultado.message);
+        }
 
     } catch (error) {
-        console.log("Error enviado usuario creado"+error);
+        console.error("Error al enviar los datos: ", error);
+        alert("Error al procesar la solicitud");
         
     }
     
