@@ -2,15 +2,6 @@ import connection from "../database/db.js"
 import productModels from "../models/productos.models.js"
 import {enviarRespuesta, mostrarError} from "../utils/errorResponses.js"
 
-// ideas Para modularizar
-
-/* modularizar el res.500 OK
-modularizar el res.200 cambiar de alguna forma el de getallproducts OK
-validacion en getelementbyid OK
-validacion en insertProduct OK 
-validacion en updateProduct con affectedRows OK
-
-*/
 
 export async function getAllProducts(request, response){
     try {

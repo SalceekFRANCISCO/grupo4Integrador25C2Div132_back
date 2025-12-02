@@ -7,8 +7,9 @@ export const seleccionarTodosLosProductos = () => {
 }
 
 export const seleccionarProductos = async ({limit = 10, offset = 0}) => {
-    const sqlTotalProd = "SELECT Count(*) as total from productos";
+    const sqlTotalProd = "SELECT count(*) as total from productos";
     const [[{total}]] = await connection.query(sqlTotalProd);
+
     let sql = "SELECT * FROM productos limit = ? offset = ?";
 
     const [rows] = await connection.query(sql, [limit, offset]);
@@ -16,7 +17,7 @@ export const seleccionarProductos = async ({limit = 10, offset = 0}) => {
     return {rows, total}
 }
 
-// Operacion CRUD
+// #region Operacion CRUD
 // Create
 export const agregarProducto = (nombre, img_url, categoria, precio, stock) => {
     let sql = "INSERT INTO productos (nombre, img_url, categoria, precio, stock) VALUES (?,?,?,?,?)";
@@ -55,3 +56,4 @@ export default {
     actualizarProducto,
     eliminarProducto
 }
+//#endregion

@@ -47,6 +47,7 @@ app.use(session({
 
 //#endregion
 
+
 //#region Devolver las vistas
 app.get("/", (request, response) => {
     response.send("TP Integrador Div 132");
@@ -108,6 +109,7 @@ app.get("/login", (request, response) => {
 });
 //#endregion
 
+
 //#region vistas del login
 // app.post("/login", async (request, response) => {
 //     try {
@@ -154,7 +156,7 @@ app.post("/login", async (request, response) => {
     try {
         const {email, contraseña} = request.body;
         // console.log(email, contraseña)
-        console.log(await hashPassword(contraseña));
+        // console.log(await hashPassword(contraseña));
         
 
         if (!email || !contraseña) {
@@ -188,9 +190,6 @@ app.post("/login", async (request, response) => {
             })
         }
 
-         
-
-
         request.session.user = {
             id: user.id,
             nombre: user.nombre,
@@ -223,6 +222,7 @@ app.get("/registrar", (request, response) => {
     })
 });
 //#endregion
+
 
 //#region llamada al puerto
 app.listen(PORT, () => {

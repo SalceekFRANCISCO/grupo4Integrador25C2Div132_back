@@ -13,11 +13,8 @@ export async function createUser(request, response) {
             enviarRespuesta(response,400,"Datos inválidos");
         }
 
-        console.log("antes del hash: "+contraseña);
         const contraseñaHash = (await hashPassword(contraseña));
-        console.log("despues del hash: "+contraseñaHash);
 
-        // let [rows] = await usersModels.agregarUsuario(nombre,email,contraseña);
         let [rows] = await usersModels.agregarUsuario(nombre,email,contraseñaHash);
 
         enviarRespuesta(response,201,"Creación exitosa.",rows);
