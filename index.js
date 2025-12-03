@@ -58,19 +58,25 @@ app.get("/", (request, response) => {
 app.get("/dashboard", requireLogin, async (request, response) => {
     try {
         // const [rows] = await connection.query("SELECT * FROM productos");
+        const [rows] = await productosModels.seleccionarTodosLosProductos();
 
-        const limit = parseInt(request.query.limit) || 10;
-        const offset = parseInt(request.query.offset) || 0;
+        // const limit = parseInt(request.query.limit) || 10;
+        // const offset = parseInt(request.query.offset) || 0;
 
-        const pagina = await productosModels.seleccionarProductos({limit, offset});
-        // const {rows, total} = seleccionarProductos();
-        // console.log(rows);
+        // const pagina = await productosModels.seleccionarProductos({limit, offset});
+
+        // response.render("index", {
+        //     title: "Dashboard",
+        //     about: "Listado de productos",
+        //     productos: pagina.rows
+        // });
 
         response.render("index", {
             title: "Dashboard",
             about: "Listado de productos",
-            productos: pagina.rows
+            productos: rows
         });
+
     } catch(error) {
         console.error(error);
     }

@@ -4,38 +4,38 @@ import productModels from "../models/productos.models.js"
 import {enviarRespuesta, mostrarError} from "../utils/errorResponses.js"
 
 
-export async function getAllProducts(request, response){
-    try {
-        const limit = parseInt(request.query.limit) || 10;
-        const offset = parseInt(request.query.offset) || 0;
-
-        const pagina = await productModels.seleccionarProductos({limit, offset});
-        
-        const mensaje = pagina.rows.length === 0 ? "No se encontraron productos" : "Productos encontrados";
-
-        enviarRespuesta(response,200,mensaje,pagina);
-        
-    } catch (error) {
-        
-        mostrarError(response,error,"No se pudieron obtener los productos");
-    }
-};
 // export async function getAllProducts(request, response){
 //     try {
-//         const [rows, fields] = await productModels.seleccionarTodosLosProductos();
 //         const limit = parseInt(request.query.limit) || 10;
 //         const offset = parseInt(request.query.offset) || 0;
-//         //const pagina = await productModels.seleccionarProductos({limit, offset});
-        
-//         const mensaje = rows.length === 0 ? "No se encontraron productos" : "Productos encontrados";
 
-//         enviarRespuesta(response,200,mensaje,rows);
+//         const pagina = await productModels.seleccionarProductos({limit, offset});
+        
+//         const mensaje = pagina.rows.length === 0 ? "No se encontraron productos" : "Productos encontrados";
+
+//         enviarRespuesta(response,200,mensaje,pagina);
         
 //     } catch (error) {
         
 //         mostrarError(response,error,"No se pudieron obtener los productos");
 //     }
 // };
+export async function getAllProducts(request, response){
+    try {
+        const [rows, fields] = await productModels.seleccionarTodosLosProductos();
+        const limit = parseInt(request.query.limit) || 10;
+        const offset = parseInt(request.query.offset) || 0;
+        //const pagina = await productModels.seleccionarProductos({limit, offset});
+        
+        const mensaje = rows.length === 0 ? "No se encontraron productos" : "Productos encontrados";
+
+        enviarRespuesta(response,200,mensaje,rows);
+        
+    } catch (error) {
+        
+        mostrarError(response,error,"No se pudieron obtener los productos");
+    }
+};
 
 export async function getProductById(request, response) {
     try {
