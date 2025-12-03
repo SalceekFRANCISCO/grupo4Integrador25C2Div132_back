@@ -1,3 +1,4 @@
+import ventasProductosModels from "../models/ventas-productos.models.js";
 import productModels from "../models/ventas.models.js";
 import {enviarRespuesta, mostrarError} from "../utils/errorResponses.js"
 
@@ -34,14 +35,20 @@ export async function getVentaById(request, response) {
 
 export async function createVenta(request, response) {
     try {
-        let {fecha, nombreUsuario, total} = request.body;
+        let {fecha, nombreUsuario, total, productos} = request.body;
         console.log("La body es " + request.body);
 
-        if (!fecha || !nombreUsuario || total === null) {
+        if (!fecha || !nombreUsuario || total === null || !Array.isArray(productos)) {
             enviarRespuesta(response, 400, "Datos inválidos");
         }
 
         let [rows] = await productModels.agregarVenta(fecha, nombreUsuario, total);
+        
+        const ventaId = rows.insertId;
+        
+        for (const productoID of productos){
+            await ventasProductosModels.agregarVentaProducto(productoID,ventaId);
+        }
 
         enviarRespuesta(response, 201, "Creación exitosa.", rows);
     }

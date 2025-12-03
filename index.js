@@ -239,6 +239,10 @@ app.get("/registrar", (request, response) => {
 });
 //#endregion
 
+//#region endpoint para api/ventas
+
+//#endregion
+
 
 //#region llamada al puerto
 app.listen(PORT, () => {
