@@ -34,7 +34,7 @@ app.set("views", join(_dirname, "src/views"));
 //#endregion
 
 
-//#region Routes
+//#region que controlador responde a cada view
 app.use("/api/productos", productRoutes);
 app.use("/api/usuarios", userRoutes);
 //#endregion 
