@@ -82,6 +82,12 @@ function crearFormularioPut(event, producto) {
             <input type="number" name="stock" id="priceProd" value="${producto.stock}" required>
             <br>
 
+        <select name="activo" id="activoProd" required>
+            <option value=1>Disponible</option>
+            <option value=0>No disponible</option>
+        </select>
+        <br>
+
 
             <input type="submit" value="Actualizar producto">
         </form>

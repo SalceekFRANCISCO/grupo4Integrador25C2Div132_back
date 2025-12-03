@@ -62,14 +62,14 @@ export async function getProductById(request, response) {
 
 export async function createProduct(request, response) {
     try {
-        let {nombre, img_url, categoria, precio, stock} = request.body;
+        let {nombre, img_url, categoria, precio, stock, activo} = request.body;
         console.log("La body es " + request.body);
 
-        if (!nombre || !categoria || !img_url || !precio || !stock) {
+        if (!nombre || !categoria || !img_url || !precio || !stock || activo === null) {
             enviarRespuesta(response,400,"Datos inválidos");
         }
 
-        let [rows] = await productModels.agregarProducto(nombre, img_url, categoria, precio, stock);
+        let [rows] = await productModels.agregarProducto(nombre, img_url, categoria, precio, stock, activo);
 
         enviarRespuesta(response,201,"Creación exitosa.",rows);
     }
@@ -78,6 +78,7 @@ export async function createProduct(request, response) {
     }
 }
 
+/*
 export async function insertProduct(request, response) {
     try {
         
@@ -98,20 +99,21 @@ export async function insertProduct(request, response) {
     }
         
 };
+*/
     
 export async function updateProduct(request, response) {
     try {
-        let {id, nombre, precio, img_url, categoria, stock} = request.body;
+        let {id, nombre, precio, img_url, categoria, stock, activo} = request.body;
         // console.log("Cuerpo de la solicitud:", request.body);
         
-    if (!nombre || !precio || !categoria || !img_url || stock === null || !id){
+    if (!nombre || !precio || !categoria || !img_url || stock === null || activo === null || !id){
         console.log("Error: Campos inválidos");
 
         enviarRespuesta(response,400,"Datos inválidos o faltan campos");
       
         }
         
-        const [resultado] = await productModels.actualizarProducto(id, nombre, precio, categoria, img_url, stock);
+        const [resultado] = await productModels.actualizarProducto(id, nombre, precio, categoria, img_url, stock, activo);
         
         if (resultado.affectedRows === 0){
             enviarRespuesta(response,400,"No se actualizó el producto");
@@ -145,4 +147,3 @@ export async function deleteProduct(request, response) {
     }
 
 };
-        

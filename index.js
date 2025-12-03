@@ -170,8 +170,8 @@ app.get("/login", (request, response) => {
 app.post("/login", async (request, response) => {
     try {
         const {email, contraseña} = request.body;
-        // console.log(email, contraseña)
-        // console.log(await hashPassword(contraseña));
+        console.log(email, contraseña)
+        console.log(await hashPassword(contraseña));
         
 
         if (!email || !contraseña) {

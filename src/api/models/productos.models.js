@@ -21,10 +21,10 @@ export const seleccionarProductos = async ({limit = 10, offset = 0}) => {
 
 // #region Operacion CRUD
 // Create
-export const agregarProducto = (nombre, img_url, categoria, precio, stock) => {
-    let sql = "INSERT INTO productos (nombre, img_url, categoria, precio, stock) VALUES (?,?,?,?,?)";
+export const agregarProducto = (nombre, img_url, categoria, precio, stock, activo) => {
+    let sql = "INSERT INTO productos (nombre, img_url, categoria, precio, stock, activo) VALUES (?, ?, ?, ?, ?, ?)";
     
-    return connection.query(sql, [nombre, img_url, categoria, precio, stock]);
+    return connection.query(sql, [nombre, img_url, categoria, precio, stock, activo]);
 }
 
 // Read
@@ -35,12 +35,12 @@ export const seleccionarProductoPorId = (id) => {
 }
 
 // Update
-export const actualizarProducto = (id, nombre, precio, categoria, img_url, stock) => {
+export const actualizarProducto = (id, nombre, precio, categoria, img_url, stock, activo) => {
     let sql = `UPDATE productos 
-                SET nombre= ?, img_url= ?, categoria= ?,  precio= ?,  stock= ?
+                SET nombre= ?, img_url= ?, categoria= ?,  precio= ?,  stock= ?, activo = ?
                 WHERE id = ?`;
-    console.log(id, nombre, precio, categoria, img_url, stock);
-    return connection.query(sql, [nombre, img_url, categoria, precio, stock, id]);
+    console.log(id, nombre, precio, categoria, img_url, stock, activo);
+    return connection.query(sql, [nombre, img_url, categoria, precio, stock, activo, id]);
 }
 
 // Delete
