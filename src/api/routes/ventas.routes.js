@@ -1,17 +1,18 @@
 import { Router } from "express";
+import { getVentas, getVentaById, createVenta, deleteVenta, updateVenta } from "../controlers/ventas.controlers.js";
+import { validateId } from "../middlewares/middlewares.js";
 
 const router = Router();
 
-router.get("/",(req,res)=>{
-    res.redirect("oso goloso .sex");
-    console.log('pene')
-})
+router.get("/", getVentas);
 
-// router.post();
+router.get("/:id", validateId, getVentaById);
 
-// router.put();
+router.post("/", createVenta);
 
-// router.delete();
+router.put("/", updateVenta);
+
+router.delete("/:id", deleteVenta);
 
 
 

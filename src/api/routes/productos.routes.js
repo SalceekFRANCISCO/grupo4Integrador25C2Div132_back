@@ -13,7 +13,7 @@ import { multerUploader } from "../middlewares/multer-middlewares.js";
 
 router.get("/", getAllProducts);
 
-router.get("/:id", validateId ,getProductById);
+router.get("/:id", validateId, getProductById);
 
 router.post("/", createProduct);
 

@@ -83,29 +83,29 @@ app.get("/dashboard", requireLogin, async (request, response) => {
     }
 });
 
-app.get("/consultar", requireLogin, (request, response) => {
+app.get("/productos/consultar", requireLogin, (request, response) => {
     response.render("consultar", {
         title: "Consultar",
         about: "Consultar productos"
     })
 });
 
-app.get("/crear", requireLogin, (request, response) => {
-    response.render("crear", {
+app.get("/productos/crear", requireLogin, (request, response) => {
+    response.render("productos/crear", {
         title: "Crear",
         about: "Crear"
     })
 });
 
-app.get("/modificar", requireLogin, (request, response) => {
-    response.render("modificar", {
+app.get("/productos/modificar", requireLogin, (request, response) => {
+    response.render("productos/modificar", {
         title: "Modificar",
         about: "Modificar un producto"
     })
 });
 
-app.get("/eliminar", requireLogin, (request, response) => {
-    response.render("eliminar", {
+app.get("/productos/eliminar", requireLogin, (request, response) => {
+    response.render("productos/eliminar", {
         title: "Eliminar",
         about: "Eliminar productos"
     })
