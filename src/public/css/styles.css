@@ -1,21 +1,18 @@
-.card-producto{
-    border: 4px solid;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 2vh;
-    width: 220px; /* agregado */
-    padding: 10px;
-    border-top-left-radius: 3rem;
-    border-bottom-right-radius: 3rem;
-    background-color: darkslategray;
-    color: #dfdac8;
-}
-
 body{
     background-color: rgba(26, 89, 183, 0.689);
     font-family: system-ui;
     /* border-style: none; */
+}
+
+main{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1rem;
+}
+
+h1{
+    text-align: center;
 }
 
 img{
@@ -35,6 +32,27 @@ label{
     font-size: 106%;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.card-producto{
+    border: 4px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2vh;
+    width: 220px; /* agregado */
+    padding: 10px;
+    border-top-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
+    background-color: darkslategray;
+    color: #dfdac8;
+}
+
+
 #contenedor-productos{
     display: flex;
     flex-wrap: wrap;
@@ -43,11 +61,6 @@ label{
     padding: 20px;
 }
 
-
-header {
-    display: flex;
-    justify-content: space-between;
-}
 
 /* estilos del login */
 .login {
@@ -107,17 +120,6 @@ header {
 
 
 /* estilos de consultar id */
-main{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    font-size: 1rem;
-}
-
-h1{
-    text-align: center;
-}
-
 .products-form {
     width: 35%;
     margin-bottom: 20px;
@@ -127,7 +129,6 @@ h1{
     height: 110px;
     justify-content: space-between;
 }
-
 /* estilos de consultar id */
 
 
@@ -138,18 +139,6 @@ h1{
     flex-direction: column;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/* estilos de crear*/
 #login-form{
     display: flex;
     flex-direction: column;
@@ -163,6 +152,7 @@ h1{
 
 .form-crear-usuarios{
     display: flex;
-   flex-direction: row; 
+    flex-direction: row; 
     justify-content: center;
 } 
+/* estilos de crear*/
