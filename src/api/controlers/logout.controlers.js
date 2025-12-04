@@ -6,9 +6,6 @@ export function destruirSesion(request, response){
             console.log("Error al destruir la sesión", error);
 
             mostrarError(response,error,"Error al cerrar la sesión.");
-            // return response.status(500).json({ //error responses
-            //     error: "Error al cerrar la sesión."
-            // })
         }
         else{
             response.redirect("/login");

@@ -42,9 +42,9 @@ export async function createVenta(request, response) {
             enviarRespuesta(response, 400, "Datos inválidos");
         }
 
-        let [rows] = await ventasModels.agregarVenta(fecha, nombreUsuario, total); //agregamos la venta
-        
-        const ventaId = rows.insertId; //obtenemos el id de la venta
+        let [rows] = await ventasModels.agregarVenta(fecha, nombreUsuario, total); //agregamos la venta  
+         
+        const ventaId = rows.insertId; //obtenemos el id de la venta 
         
         for (const productoID of productos){ //recorremos el array de ids mandado por Front
             await ventasProductosModels.agregarVentaProducto(productoID,ventaId);
