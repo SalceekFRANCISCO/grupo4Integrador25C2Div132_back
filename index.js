@@ -1,15 +1,15 @@
 //#region Imports
-import express, { response } from "express";
+import express from "express";
 import environments from "./src/api/config/environments.js";
-import connection  from "./src/api/database/db.js";
+// import connection  from "./src/api/database/db.js";
 import cors from "cors";
 import { loggerUrl, requireLogin } from "./src/api/middlewares/middlewares.js";
-import {productRoutes, userRoutes, ventasRoutes } from "./src/api/routes/index.js";
+import {loginRoutes, logoutRoutes, productRoutes, userRoutes, ventasRoutes } from "./src/api/routes/index.js";
 import { _dirname, join } from "./src/api/utils/index.js";
 import { handleMulterError } from "./src/api/middlewares/multer-middlewares.js";
 import session from "express-session";
-import { comparePassword, hashPassword } from "./src/api/utils/bcrypt.js";
-import { seleccionarProductos } from "./src/api/models/productos.models.js";
+// import { comparePassword, hashPassword } from "./src/api/utils/bcrypt.js";
+// import { seleccionarProductos } from "./src/api/models/productos.models.js";
 import productosModels from "./src/api/models/productos.models.js";
 
 const app = express();
@@ -34,13 +34,6 @@ app.set("views", join(_dirname, "src/views"));
 //#endregion
 
 
-//#region que controlador responde a cada view
-app.use("/api/productos", productRoutes);
-app.use("/api/usuarios", userRoutes);
-app.use("/api/ventas", ventasRoutes);
-//#endregion 
-
-
 //#region Session
 app.use(session({
     secret: SESSION_KEY,
@@ -51,9 +44,18 @@ app.use(session({
 //#endregion
 
 
+//#region que controlador responde a cada view
+app.use("/api/productos", productRoutes);
+app.use("/api/usuarios", userRoutes);
+app.use("/api/ventas", ventasRoutes);
+app.use("/login", loginRoutes);
+app.use("/logout",logoutRoutes)
+//#endregion 
+
+
 //#region Devolver las vistas
 app.get("/", (request, response) => {
-    response.send("TP Integrador Div 132");
+    response.redirect("TP Integrador Div 132");
 });
 
 app.get("/dashboard", requireLogin, async (request, response) => {
@@ -117,20 +119,30 @@ app.get("/upload", requireLogin, (request, response) => {
     })
 })
 
-app.get("/login", (request, response) => {
-    response.render("login", {
-        title: "login",
-        about: "Iniciá sesión"
-    });
+app.get("/registrar", (request, response) => {
+    response.render("crearUsuario", {
+        title: "Registrar",
+        about: "Registrar un usuario" //parametro de las view
+    })
 });
+
+// app.get("/login", (request, response) => {
+//     response.render("login", {
+//         title: "login",
+//         about: "Iniciá sesión"
+//     });
+// });
+
 //#endregion
 
 
-//#region vistas del login
+//#region vistas login
 // app.post("/login", async (request, response) => {
 //     try {
 //         const {email, contraseña} = request.body;
-//         console.log(email, contraseña)
+//         // console.log(email, contraseña)
+//         // console.log(await hashPassword(contraseña));
+        
 
 //         if (!email || !contraseña) {
 //             return response.render("login", {
@@ -140,9 +152,16 @@ app.get("/login", (request, response) => {
 //             })
 //         }
 
-//         const sql = "SELECT * FROM usuarios WHERE email = ? AND contraseña = ?";
-//         const [rows] = await connection.query(sql, [email, contraseña]);
+//         // modelo vistas
+//         // controlador vistas
+//         // routes login
+//         // configurar enrutador
+//         const sql = "SELECT * FROM usuarios WHERE email = ?";
+//         const [rows] = await connection.query(sql, [email]);
 
+//         // if (rows[0].length === 0) {
+//         //     return response.redirect("osogoloso.sex")
+//         // }
 //         if (rows[0].length === 0) {
 //             return response.render("login", {
 //                 title: "login",
@@ -151,9 +170,17 @@ app.get("/login", (request, response) => {
 //             })
 //         }
 
-//         console.log(rows[0]);
 //         const user = rows[0];
 //         console.table(user);
+
+//         const isMatch = await comparePassword(contraseña,user.contraseña); 
+//         if(!isMatch){
+//             return response.render("login", {
+//                 title: "login",
+//                 about: "login",
+//                 error: "Credenciales incorrectas"
+//             })
+//         }
 
 //         request.session.user = {
 //             id: user.id,
@@ -168,78 +195,17 @@ app.get("/login", (request, response) => {
 //     }
 // });
 
-app.post("/login", async (request, response) => {
-    try {
-        const {email, contraseña} = request.body;
-        console.log(email, contraseña)
-        console.log(await hashPassword(contraseña));
-        
-
-        if (!email || !contraseña) {
-            return response.render("login", {
-                title: "Login",
-                about: "Login",
-                error: "Todos los campos son obligatorios"
-            })
-        }
-
-        const sql = "SELECT * FROM usuarios WHERE email = ?";
-        const [rows] = await connection.query(sql, [email]);
-
-        if (rows[0].length === 0) {
-            return response.render("login", {
-                title: "login",
-                about: "login",
-                error: "Credenciales incorrectas"
-            })
-        }
-
-        const user = rows[0];
-        console.table(user);
-
-        const isMatch = await comparePassword(contraseña,user.contraseña); 
-        if(!isMatch){
-            return response.render("login", {
-                title: "login",
-                about: "login",
-                error: "Credenciales incorrectas"
-            })
-        }
-
-        request.session.user = {
-            id: user.id,
-            nombre: user.nombre,
-            email: user.email
-        };
-
-        response.redirect("/dashboard");
-
-    } catch(error) {
-        console.error("Error en el login" + error);
-    }
-});
-
-app.post("/logout", (request, response) => {
-    request.session.destroy((error) => {
-        if (error) {
-            console.log("Error al destruir la sesión", error);
-            return response.status(500).json({
-                error: "Error al cerrar la sesión."
-            })
-        }
-        response.redirect("/login");
-    })
-})
-
-app.get("/registrar", (request, response) => {
-    response.render("crearUsuario", {
-        title: "Registrar",
-        about: "Registrar un usuario"
-    })
-});
-//#endregion
-
-//#region endpoint para api/ventas
+// app.post("/logout", (request, response) => {
+//     request.session.destroy((error) => {
+//         if (error) {
+//             console.log("Error al destruir la sesión", error);
+//             return response.status(500).json({ //error responses
+//                 error: "Error al cerrar la sesión."
+//             })
+//         }
+//         response.redirect("/login");
+//     })
+// })
 
 //#endregion
 

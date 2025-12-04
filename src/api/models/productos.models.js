@@ -1,12 +1,12 @@
 import connection from "../database/db.js"
 
-export const seleccionarTodosLosProductos = () => {
+const seleccionarTodosLosProductos = () => {
     let sql = "SELECT * FROM productos";// optimizar esto
 
     return connection.query(sql);
 }
 
-export const seleccionarProductos = async ({limit = 10, offset = 0}) => {
+const seleccionarProductos = async ({limit = 10, offset = 0}) => {
     const sqlTotalProd = "SELECT count(*) as total from productos";
     const [[{total}]] = await connection.query(sqlTotalProd);
     
@@ -21,21 +21,21 @@ export const seleccionarProductos = async ({limit = 10, offset = 0}) => {
 
 // #region Operacion CRUD
 // Create
-export const agregarProducto = (nombre, img_url, categoria, precio, stock, activo) => {
+const agregarProducto = (nombre, img_url, categoria, precio, stock, activo) => {
     let sql = "INSERT INTO productos (nombre, img_url, categoria, precio, stock, activo) VALUES (?, ?, ?, ?, ?, ?)";
     
     return connection.query(sql, [nombre, img_url, categoria, precio, stock, activo]);
 }
 
 // Read
-export const seleccionarProductoPorId = (id) => {
+const seleccionarProductoPorId = (id) => {
     let sql = "SELECT * FROM productos WHERE id = ?";
     
     return connection.query(sql, [id]);
 }
 
 // Update
-export const actualizarProducto = (id, nombre, precio, categoria, img_url, stock, activo) => {
+const actualizarProducto = (id, nombre, precio, categoria, img_url, stock, activo) => {
     let sql = `UPDATE productos 
                 SET nombre= ?, img_url= ?, categoria= ?,  precio= ?,  stock= ?, activo = ?
                 WHERE id = ?`;
@@ -44,7 +44,7 @@ export const actualizarProducto = (id, nombre, precio, categoria, img_url, stock
 }
 
 // Delete
-export const eliminarProducto = (id) => {
+const eliminarProducto = (id) => {
     let sql = "DELETE FROM productos WHERE id = ?";
 
     return connection.query(sql, [id]);

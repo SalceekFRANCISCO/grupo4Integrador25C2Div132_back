@@ -1,10 +1,10 @@
 import ventasProductosModels from "../models/ventas-productos.models.js";
-import productModels from "../models/ventas.models.js";
+import ventasModels from "../models/ventas.models.js";
 import {enviarRespuesta, mostrarError} from "../utils/errorResponses.js"
 
 export async function getVentas(request, response) {
     try {
-        const [rows, fields] = await productModels.seleccionarVentas();
+        const [rows, fields] = await ventasModels.seleccionarVentas();
 
         const mensaje = rows.length === 0 ? "No se encontraron ventas" : "Ventas encontradas";
 
@@ -18,7 +18,7 @@ export async function getVentas(request, response) {
 export async function getVentaById(request, response) {
     try {
         let {id} = request.params; 
-        const [rows, fields] = await productModels.seleccionarVentaPorId(id);
+        const [rows, fields] = await ventasModels.seleccionarVentaPorId(id);
 
         if(rows.length === 0) {
             console.log(`No existe una venta con el id: ${id}`);
@@ -29,7 +29,6 @@ export async function getVentaById(request, response) {
         }
     }
     catch(error) {
-        console.log("soy el error");
         
         mostrarError(response, error, "No se pudo obtener la venta");
     }
@@ -38,17 +37,16 @@ export async function getVentaById(request, response) {
 export async function createVenta(request, response) {
     try {
         let {fecha, nombreUsuario, total, productos} = request.body;
-        console.log("La body es " + request.body);
 
         if (!fecha || !nombreUsuario || total === null || !Array.isArray(productos)) {
             enviarRespuesta(response, 400, "Datos inválidos");
         }
 
-        let [rows] = await productModels.agregarVenta(fecha, nombreUsuario, total);
+        let [rows] = await ventasModels.agregarVenta(fecha, nombreUsuario, total); //agregamos la venta
         
-        const ventaId = rows.insertId;
+        const ventaId = rows.insertId; //obtenemos el id de la venta
         
-        for (const productoID of productos){
+        for (const productoID of productos){ //recorremos el array de ids mandado por Front
             await ventasProductosModels.agregarVentaProducto(productoID,ventaId);
         }
 
@@ -67,7 +65,7 @@ export async function updateVenta(request, response) {
             enviarRespuesta(response,400,"Datos inválidos o faltan campos");
         }
         
-        const [resultado] = await productModels.actualizarVenta(id, fecha, nombreUsuario, total);
+        const [resultado] = await ventasModels.actualizarVenta(id, fecha, nombreUsuario, total);
         
         if (resultado.affectedRows === 0){
             enviarRespuesta(response,400,"No se actualizó la venta");
@@ -87,7 +85,7 @@ export async function deleteVenta(request, response) {
         
         const {id} = request.params; 
         
-        const [resultado] = await productModels.eliminarVenta(id);
+        const [resultado] = await ventasModels.eliminarVenta(id);
         
         if (!resultado.affectedRows === 0){
             enviarRespuesta(response,400,"No se pudo eliminar la venta.");
