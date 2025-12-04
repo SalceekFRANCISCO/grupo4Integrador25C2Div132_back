@@ -29,6 +29,8 @@ export async function getVentaById(request, response) {
         }
     }
     catch(error) {
+        console.log("soy el error");
+        
         mostrarError(response, error, "No se pudo obtener la venta");
     }
 };
