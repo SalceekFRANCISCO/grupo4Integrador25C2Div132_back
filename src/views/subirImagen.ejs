@@ -1,31 +1,31 @@
-<!DOCTYPE html>
-<html lang="es">
+<%- include("./partials/head.ejs") %>
+<%- include("./partials/nav.ejs") %>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/subirImagen.css">
-        <title><%= typeof title !== 'undefined' ? title : 'Subir archivo' %></title>
-    </head>
+<body class="cuerpo-subir-img">
+    <article class="contenedor-form">
 
-    <body>
-    <form id="uploadForm" class="upload-container" enctype="multipart/form-data">
-    <label id="dropArea" class="drop-zone">
-        <p class="drop-text">Arrastra un archivo aquí o <span>explora</span></p>
-        <p class="drop-subtext">Tamaño máximo: 5MB</p>
-        <input type="file" id="fileInput" name="image" />
-    </label>
+        <form id="formularioSubida" class="contenedor-subida" enctype="multipart/form-data">
+            
+            <label id="zonaArrastre" class="zona-arrastre">
+                <p class="texto-arrastre">
+                    Arrastra un archivo aquí o <span>explora</span>
+                </p>
+                <p class="subtexto-arrastre">Tamaño máximo: 5MB</p>
+                <input type="file" id="inputArchivo" name="imagen" />
+            </label>
+            
+            <div class="vista-archivo" id="vistaArchivo">
+                <div id="nombreArchivo">Archivo:</div>
+                
+                <div class="barra-progreso">
+                    <div class="relleno-progreso" id="rellenoProgreso"></div>
+                </div>
+            </div>
+            
+            <button class="boton-subir" type="submit">Subir archivo</button>
+        </form>
+    </article>
+    
+    <script src="/js/subirImagen.js"></script>
 
-    <div class="file-preview" id="filePreview">
-        <div id="fileName">Archivo:</div>
-        <div class="progress-bar">
-            <div class="progress-bar-fill" id="progressFill"></div>
-        </div>
-    </div>
-
-    <button class="upload-button" type="submit">Subir archivo</button>
-    </form>
-    <script src="js/subirImagen.js"></script>
-    </body>
-
-</html>
+<%- include("./partials/footer.ejs") %>

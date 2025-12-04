@@ -10,25 +10,24 @@
         <label for="imagenProd">Imagen</label>
         <input type="text" name="img_url" id="imagenProd" required>
 
-        <select name="categoria" id="categoriaProd" required>
+        <select class="selectores" name="categoria" id="categoriaProd" required>
             <option value="figura">Figura</option>
             <option value="sable">Sable</option>
         </select>
 
-        <select name="activo" id="activoProd" required>
+        <select class="selectores" name="activo" id="activoProd" required>
             <option value=1>Disponible</option>
             <option value=0>No disponible</option>
         </select>
 
         <label for="precioProd">Precio</label>
         <input type="number" name="precio" id="precioProd" required>
-        <br>
 
         <label for="stockProd">Cantidad</label>
         <input type="number" name="stock" id="stockProd" required>
-        <br>
+        <!-- <br> -->
 
-        <input type="submit" value="Crear producto">
+        <input class="input-hover" id="input-crear-producto-crearEjs" type="submit" value="Crear producto">
     </form>
 
     <div id="contenedor-productos"></div>
