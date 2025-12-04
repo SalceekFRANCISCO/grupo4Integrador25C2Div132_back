@@ -84,7 +84,7 @@ app.get("/dashboard", requireLogin, async (request, response) => {
 });
 
 app.get("/productos/consultar", requireLogin, (request, response) => {
-    response.render("consultar", {
+    response.render("productos/consultar", {
         title: "Consultar",
         about: "Consultar productos"
     })

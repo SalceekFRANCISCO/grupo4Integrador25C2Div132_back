@@ -1,5 +1,6 @@
 <%- include("partials/head.ejs") %>
 
+<article class="login">
 <h1><%= about %></h1>
 
 <% if (typeof error !== "undefined") { %>
@@ -8,16 +9,17 @@
     </div>
 <% } %>
 
-<form id="login-form" action="/login" method="post" autocomplete="off">
-    <label for="emailUser">Email</label>
-    <input type="email" name="email" id="emailUser" required>
+    <form id="login-form" action="/login" method="post" autocomplete="off">
+        <label for="emailUser">Email</label>
+        <input type="email" name="email" id="emailUser" required>
+        
+        <label for="passwordUser">Password</label>
+        <input type="password" name="contraseña" id="passwordUser" required>
 
-    <label for="passwordUser">Password</label>
-    <input type="password" name="contraseña" id="passwordUser" required>
-
-    <input type="submit" class="boton-login" value="Login">
-    <input type="button" id="acceso" class="boton-login" value="Acceso rápido">
-</form>
+        <input type="submit" class="boton-login" value="Login">
+        <input type="button" id="acceso" class="boton-login" value="Acceso rápido">
+    </form>
+</article>
 
 <script>
     let emailUser = document.getElementById("emailUser");

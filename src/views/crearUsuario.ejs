@@ -1,4 +1,5 @@
 <%- include("partials/head.ejs") %>
+<%- include("partials/nav.ejs") %>
 
 <h1><%= about %></h1>
 
@@ -8,17 +9,19 @@
     </div>
 <% } %>
 
-<form id="login-form" action="/api/usuarios" method="post" autocomplete="on">
-    <label for="nombreUser">Nombre</label>
-    <input type="text" name="nombre" id="nombreUser" required>
-
-    <label for="emailUser">Email</label>
-    <input type="email" name="email" id="emailUser" required>
-
-    <label for="passwordUser">Password</label>
-    <input type="password" name="contraseña" id="passwordUser" required>
-
-    <input type="submit" class="boton-login" value="Crear">
-</form>
+<section class="form-crear-usuarios">
+    <form id="login-form" action="/api/usuarios" method="post" autocomplete="on">
+        <label for="nombreUser">Nombre</label>
+        <input type="text" name="nombre" id="nombreUser" required>
+        
+        <label for="emailUser">Email</label>
+        <input type="email" name="email" id="emailUser" required>
+        
+        <label for="passwordUser">Password</label>
+        <input type="password" name="contraseña" id="passwordUser" required>
+        
+        <input type="submit" class="boton-login" value="Crear">
+    </form>
+</section>
 <script src="js/crearUsuario.js"></script>
 <%- include("partials/footer.ejs") %>

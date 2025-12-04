@@ -3,27 +3,22 @@
 
 <main>
     <h1><%= about %></h1>
-    <hr>
     <form id="crearProductos-form">
         <label for="nombreProd">Nombre</label>
         <input type="text" name="nombre" id="nombreProd" required>
-        <br>
 
         <label for="imagenProd">Imagen</label>
         <input type="text" name="img_url" id="imagenProd" required>
-        <hr>
 
         <select name="categoria" id="categoriaProd" required>
             <option value="figura">Figura</option>
             <option value="sable">Sable</option>
         </select>
-        <hr>
 
         <select name="activo" id="activoProd" required>
             <option value=1>Disponible</option>
             <option value=0>No disponible</option>
         </select>
-        <hr>
 
         <label for="precioProd">Precio</label>
         <input type="number" name="precio" id="precioProd" required>

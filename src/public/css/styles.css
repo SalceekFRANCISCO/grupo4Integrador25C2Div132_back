@@ -6,11 +6,34 @@
     font-size: 2vh;
     width: 220px; /* agregado */
     padding: 10px;
-    border-radius: 10px;
+    border-top-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
     background-color: darkslategray;
+    color: #dfdac8;
 }
 
+body{
+    background-color: rgba(26, 89, 183, 0.689);
+    font-family: system-ui;
+    /* border-style: none; */
+}
 
+img{
+    width: 165px;
+    height: 152px;
+    border-radius: 4px;
+}
+
+input{
+    height: 28px;
+    border-radius: 4px;
+    border-radius: none;
+    border-style: none;
+}
+
+label{
+    font-size: 106%;
+}
 
 #contenedor-productos{
     display: flex;
@@ -21,16 +44,125 @@
 }
 
 
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* estilos del login */
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 2px solid; */
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid; */
+}
+
+.login form input {
+    margin-bottom: 1vh;
+    width: 15vh;
+    margin-top: 1vh;
+    margin-left: 1vh;
+}
+/* estilos del login */
+
+
+/* estilos del nav */
+.navegador{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: 3px solid;
+}
+
+.navegador nav ul{
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    /* font-family: system-ui; */
+    font-size: 1rem;
+    /* border-bottom: 3px; */
+}
+
+.input{
+    /* border: 2px solid; */
+    width: 22vw;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.input-cerrar-sesion{
+    border-radius: 3px;
+    padding: 5px;
+    background-color: darkgray;
+} 
+
+/* estilos del nav */
+
+
+/* estilos de consultar id */
+main{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1rem;
+}
+
+h1{
+    text-align: center;
+}
+
 .products-form {
     width: 35%;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     height: 110px;
     justify-content: space-between;
 }
 
-header {
+/* estilos de consultar id */
+
+
+
+/* estilos de crear*/
+#crearProductos-form{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* estilos de crear*/
+#login-form{
+    display: flex;
+    flex-direction: column;
+    width: 222px;
+}
+
+.boton-login{
+    margin-top: 12px;
+    width: 42%;
+}
+
+.form-crear-usuarios{
+    display: flex;
+   flex-direction: row; 
+    justify-content: center;
+} 
