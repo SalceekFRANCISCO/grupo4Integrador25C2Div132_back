@@ -323,3 +323,22 @@ input[type="file"] {
 }
 
 /* estilos de subirImagen*/
+
+
+
+/* estilos de modificar*/
+#updateProducts-form{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 25vw;
+}
+
+.li-botonera{
+  list-style: none;
+}
+
+
+
+
+/* estilos de modificar*/

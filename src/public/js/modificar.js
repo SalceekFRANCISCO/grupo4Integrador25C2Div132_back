@@ -30,12 +30,12 @@ function mostrarProducto(producto) {
     // console.table(producto); // El producto se recibe correctamente
 
     let htmlProducto = `
-        <li class="li-listados">
+        <li class="li-botonera">
             <img src="${producto.img_url}" alt="${producto.nombre}" class="img-listados">
             <p>Id: ${producto.id}/ Nombre: ${producto.nombre}/ <strong>Precio: $${producto.precio}</strong></p>
         </li>
         <li class="li-botonera">
-            <input type="button" id="updateProduct_button" value="Actualizar producto">
+            <input class="input-hover" type="button" id="updateProduct_button" value="Actualizar producto">
         </li>
         `;
 
@@ -68,9 +68,9 @@ function crearFormularioPut(event, producto) {
             <br>
 
             <label for="categoryProd">Categoria</label>
-            <select name="categoria" id="categoryProd" required>
-                <option value="sable">Juguete</option>
-                <option value="figura">Ropa</option>
+            <select class="selectores" name="categoria" id="categoryProd" required>
+                <option value="sable">Sable</option>
+                <option value="figura">Figura</option>
             </select>
             <br>
 
@@ -82,14 +82,14 @@ function crearFormularioPut(event, producto) {
             <input type="number" name="stock" id="priceProd" value="${producto.stock}" required>
             <br>
 
-        <select name="activo" id="activoProd" required>
+        <select class="selectores" name="activo" id="activoProd" required>
             <option value=1>Disponible</option>
             <option value=0>No disponible</option>
         </select>
         <br>
 
 
-            <input type="submit" value="Actualizar producto">
+            <input class="input-hover" type="submit" value="Actualizar producto">
         </form>
     `;
 
@@ -127,7 +127,7 @@ async function actualizarProducto(event) {
 
         if (response.ok) {
             console.log(result.message);
-            alert(result);
+            alert("actualizacion exitosa");
 
             listado_productos.innerHTML = "";
             contenedor_formulario.innerHTML = "";
