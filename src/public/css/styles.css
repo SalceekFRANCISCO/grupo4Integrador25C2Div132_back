@@ -337,8 +337,10 @@ input[type="file"] {
 .li-botonera{
   list-style: none;
 }
-
-
-
-
 /* estilos de modificar*/
+
+/* Registrar*/
+.texto-registrarse {
+  width: 9vw;
+  margin-left: 1.8vw;
+}
