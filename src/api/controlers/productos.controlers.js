@@ -1,31 +1,11 @@
-import { fileLoader } from "ejs";
-import connection from "../database/db.js"
+// import { fileLoader } from "ejs";
+// import connection from "../database/db.js"
 import productModels from "../models/productos.models.js"
 import {enviarRespuesta, mostrarError} from "../utils/errorResponses.js"
 
-
-// export async function getAllProducts(request, response){
-//     try {
-//         const limit = parseInt(request.query.limit) || 10;
-//         const offset = parseInt(request.query.offset) || 0;
-
-//         const pagina = await productModels.seleccionarProductos({limit, offset});
-        
-//         const mensaje = pagina.rows.length === 0 ? "No se encontraron productos" : "Productos encontrados";
-
-//         enviarRespuesta(response,200,mensaje,pagina);
-        
-//     } catch (error) {
-        
-//         mostrarError(response,error,"No se pudieron obtener los productos");
-//     }
-// };
 export async function getAllProducts(request, response){
     try {
-        const [rows, fields] = await productModels.seleccionarTodosLosProductos();
-        const limit = parseInt(request.query.limit) || 10;
-        const offset = parseInt(request.query.offset) || 0;
-        //const pagina = await productModels.seleccionarProductos({limit, offset});
+        const [rows] = await productModels.seleccionarTodosLosProductos();
         
         const mensaje = rows.length === 0 ? "No se encontraron productos" : "Productos encontrados";
 
@@ -41,7 +21,7 @@ export async function getProductById(request, response) {
     try {
         let {id} = request.params; 
 
-        const [rows, fields] = await productModels.seleccionarProductoPorId(id);
+        const [rows] = await productModels.seleccionarProductoPorId(id);
 
         if(rows.length === 0){
             console.log(`No existe producto con id: ${id}`);
@@ -77,34 +57,10 @@ export async function createProduct(request, response) {
         mostrarError(response,error,"Error creando el producto");
     }
 }
-
-/*
-export async function insertProduct(request, response) {
-    try {
-        
-        const {nombre, img_url, categoria, precio, stock} = request.body;
-        
-        if ( !nombre || !precio || !tipo || !img_url || !stock){
-            enviarRespuesta(response,400,"Datos inválidos");
-        };
-        
-        const [rows] = await productModels.agregarProducto();
-
-        enviarRespuesta(response,201,"Creación exitosa.",rows);
-        
-    } catch (error) {
-        
-        mostrarError(response,error,"Error modificando el producto");
-            
-    }
-        
-};
-*/
     
 export async function updateProduct(request, response) {
     try {
         let {id, nombre, precio, img_url, categoria, stock, activo} = request.body;
-        // console.log("Cuerpo de la solicitud:", request.body);
         
     if (!nombre || !precio || !categoria || !img_url || stock === null || activo === null || !id){
         console.log("Error: Campos inválidos");

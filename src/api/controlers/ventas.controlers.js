@@ -4,7 +4,7 @@ import {enviarRespuesta, mostrarError} from "../utils/errorResponses.js"
 
 export async function getVentas(request, response) {
     try {
-        const [rows, fields] = await ventasModels.seleccionarVentas();
+        const [rows] = await ventasModels.seleccionarVentas();
 
         const mensaje = rows.length === 0 ? "No se encontraron ventas" : "Ventas encontradas";
 
@@ -18,7 +18,7 @@ export async function getVentas(request, response) {
 export async function getVentaById(request, response) {
     try {
         let {id} = request.params; 
-        const [rows, fields] = await ventasModels.seleccionarVentaPorId(id);
+        const [rows] = await ventasModels.seleccionarVentaPorId(id);
 
         if(rows.length === 0) {
             console.log(`No existe una venta con el id: ${id}`);

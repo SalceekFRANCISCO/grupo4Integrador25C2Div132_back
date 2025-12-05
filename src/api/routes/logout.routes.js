@@ -1,4 +1,4 @@
-import connection from "../database/db.js"
+// import connection from "../database/db.js"
 import Router from "express";
 
 const router = Router();

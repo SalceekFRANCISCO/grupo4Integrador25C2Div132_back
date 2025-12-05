@@ -1,4 +1,4 @@
-import connection from "../database/db.js"
+// import connection from "../database/db.js"
 import usersModels from "../models/usuarios.models.js"
 import {enviarRespuesta, mostrarError} from "../utils/errorResponses.js"
 import { hashPassword } from "../utils/bcrypt.js";

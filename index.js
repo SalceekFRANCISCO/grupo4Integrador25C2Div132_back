@@ -1,15 +1,12 @@
 //#region Imports
 import express from "express";
 import environments from "./src/api/config/environments.js";
-// import connection  from "./src/api/database/db.js";
 import cors from "cors";
 import { loggerUrl, requireLogin } from "./src/api/middlewares/middlewares.js";
 import {loginRoutes, logoutRoutes, productRoutes, userRoutes, ventasRoutes } from "./src/api/routes/index.js";
 import { _dirname, join } from "./src/api/utils/index.js";
 import { handleMulterError } from "./src/api/middlewares/multer-middlewares.js";
 import session from "express-session";
-// import { comparePassword, hashPassword } from "./src/api/utils/bcrypt.js";
-// import { seleccionarProductos } from "./src/api/models/productos.models.js";
 import productosModels from "./src/api/models/productos.models.js";
 
 const app = express();
@@ -60,19 +57,7 @@ app.get("/", (request, response) => {
 
 app.get("/dashboard", requireLogin, async (request, response) => {
     try {
-        // const [rows] = await connection.query("SELECT * FROM productos");
         const [rows] = await productosModels.seleccionarTodosLosProductos();
-
-        // const limit = parseInt(request.query.limit) || 10;
-        // const offset = parseInt(request.query.offset) || 0;
-
-        // const pagina = await productosModels.seleccionarProductos({limit, offset});
-
-        // response.render("index", {
-        //     title: "Dashboard",
-        //     about: "Listado de productos",
-        //     productos: pagina.rows
-        // });
 
         response.render("index", {
             title: "Dashboard",
@@ -125,87 +110,6 @@ app.get("/registrar", (request, response) => {
         about: "Registrar un usuario" //parametro de las view
     })
 });
-
-// app.get("/login", (request, response) => {
-//     response.render("login", {
-//         title: "login",
-//         about: "Iniciá sesión"
-//     });
-// });
-
-//#endregion
-
-
-//#region vistas login
-// app.post("/login", async (request, response) => {
-//     try {
-//         const {email, contraseña} = request.body;
-//         // console.log(email, contraseña)
-//         // console.log(await hashPassword(contraseña));
-        
-
-//         if (!email || !contraseña) {
-//             return response.render("login", {
-//                 title: "Login",
-//                 about: "Login",
-//                 error: "Todos los campos son obligatorios"
-//             })
-//         }
-
-//         // modelo vistas
-//         // controlador vistas
-//         // routes login
-//         // configurar enrutador
-//         const sql = "SELECT * FROM usuarios WHERE email = ?";
-//         const [rows] = await connection.query(sql, [email]);
-
-//         // if (rows[0].length === 0) {
-//         //     return response.redirect("osogoloso.sex")
-//         // }
-//         if (rows[0].length === 0) {
-//             return response.render("login", {
-//                 title: "login",
-//                 about: "login",
-//                 error: "Credenciales incorrectas"
-//             })
-//         }
-
-//         const user = rows[0];
-//         console.table(user);
-
-//         const isMatch = await comparePassword(contraseña,user.contraseña); 
-//         if(!isMatch){
-//             return response.render("login", {
-//                 title: "login",
-//                 about: "login",
-//                 error: "Credenciales incorrectas"
-//             })
-//         }
-
-//         request.session.user = {
-//             id: user.id,
-//             nombre: user.nombre,
-//             email: user.email
-//         };
-
-//         response.redirect("/dashboard");
-
-//     } catch(error) {
-//         console.error("Error en el login" + error);
-//     }
-// });
-
-// app.post("/logout", (request, response) => {
-//     request.session.destroy((error) => {
-//         if (error) {
-//             console.log("Error al destruir la sesión", error);
-//             return response.status(500).json({ //error responses
-//                 error: "Error al cerrar la sesión."
-//             })
-//         }
-//         response.redirect("/login");
-//     })
-// })
 
 //#endregion
 
